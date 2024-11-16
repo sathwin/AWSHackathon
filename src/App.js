@@ -1,23 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
 
 function App() {
+  const [files, setFiles] = useState([]);
+  const [prompt, setPrompt] = useState('');
+
+  const handleFileChange = (e) => {
+    setFiles(e.target.files);
+  };
+
+  const handlePromptChange = (e) => {
+    setPrompt(e.target.value);
+  };
+
+  const handleUpload = async () => {
+    if (files.length === 0) return;
+    // Implement the logic to upload files and prompt to your backend here
+    alert('Files and prompt ready to be uploaded!');
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ padding: '20px', fontFamily: 'Arial' }}>
+      <h1>Data Transformation Portal</h1>
+      <input type="file" multiple onChange={handleFileChange} />
+      <br /><br />
+      <textarea
+        placeholder="Enter your prompt here"
+        value={prompt}
+        onChange={handlePromptChange}
+        rows="5"
+        cols="50"
+      />
+      <br /><br />
+      <button onClick={handleUpload}>Upload</button>
     </div>
   );
 }
